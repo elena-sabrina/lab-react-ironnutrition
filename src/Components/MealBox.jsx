@@ -2,6 +2,17 @@ import React from "react";
 import meals from "./../meals";
 
 class MealBox extends React.Component {
+  state = {
+    quantity: 1
+  };
+
+  handleQuantityChange = (event) => {
+    const { value } = event.target;
+    this.setState({
+      quantity: Number(value)
+    });
+  };
+
   render() {
     const meal = this.props.meal;
     return (
@@ -17,15 +28,17 @@ class MealBox extends React.Component {
           <small>{meal.calories} cal</small>
         </div>
         <form className='row align-self-center'>
-          <input className='form-control col-9' type='number' value='1' />
+          <input
+            className='form-control col-9'
+            type='number'
+            onChange={this.handleQuantityChange}
+            value={this.state.quantity}
+          />
         </form>
+        <button>+</button>
       </div>
     );
   }
 }
-
-
-
-
 
 export default MealBox;
